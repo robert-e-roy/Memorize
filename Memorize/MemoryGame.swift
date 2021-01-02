@@ -14,6 +14,8 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     private(set) var cards: Array<Card>
     // need mutating in a struct
     
+    var score: Int = 0
+    
     private var indexOfTheOneAndOnlyFaceUpCard: Int? {
         get { cards.indices.filter {  cards[$0].isFaceUp }.only }
         set {
@@ -30,8 +32,11 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                 if cards[chosenIndex].content == cards[potentialMatchIndex].content {
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchIndex].isMatched = true
+                    score += 2 // found a match
+
                 }
                 self.cards[chosenIndex].isFaceUp = true
+
             } else {
                 indexOfTheOneAndOnlyFaceUpCard = chosenIndex
             }

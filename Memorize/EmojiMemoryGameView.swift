@@ -12,16 +12,21 @@ struct EmojiMemoryGameView: View {
     @ObservedObject var viewModel:EmojiMemoryGame
     
     var body: some View {
+        Text("Theme name and score \(viewModel.score)")
         Grid( viewModel.cards)  {  card in // view builder
             CardView(card: card).onTapGesture {
                 viewModel.choose(card: card)
             }
             .padding(5)
+
         }
     .font(viewModel.cards.count / 2 > 4 ? .callout : .largeTitle)
             .padding()
             .foregroundColor(Color.orange)
+    Button("New Game", action: viewModel.newGame )
+
     }
+
 }
 
 struct CardView: View {
@@ -32,31 +37,22 @@ struct CardView: View {
             self.body(for: geometry.size)
         }
     }
-            
+    
+    @ViewBuilder
     private func body (for size: CGSize ) -> some View {
+        if card.isFaceUp || !card.isMatched {
             ZStack {
-                if card.isFaceUp {
-                    RoundedRectangle(cornerRadius: cornerRadious).fill(Color.white)
-                    RoundedRectangle(cornerRadius: cornerRadious).stroke(lineWidth: edgeLineWidth)
-                    Pie(startAngle: Angle.degrees(0 - 90), endAngle: Angle.degrees(110 - 90),
-                        clockwise: true
-                    )
-                        .padding(5)
-                        .opacity(0.4)
-
-                    Text(card.content)
-                } else {
-                    if !card.isMatched {
-                        RoundedRectangle(cornerRadius: cornerRadious).fill()
-                    }
-                }
+                Pie(startAngle: Angle.degrees(0 - 90), endAngle: Angle.degrees(110 - 90),clockwise: true)
+                    .padding(5).opacity(0.4)
+                Text(card.content)
+                    .font(Font.system(size:fontSize(for: size)))
             }
-            .font(Font.system(size: fontSize(for: size)))
-       }
+           .cardify(isFaceUp: card.isFaceUp)
+        }
+    }
     //MARK: - Drawing Constants
 
-    private let cornerRadious: CGFloat = 10
-    private let edgeLineWidth: CGFloat = 3
+
     private let fontScaleFacter: CGFloat = 0.7
     // tiny function to make it look nicer
     
