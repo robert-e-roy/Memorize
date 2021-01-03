@@ -16,7 +16,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     private(set) var cards: Array<Card>
     // need mutating in a struct
     
-    var score: Int = 0
+    var score = 0
     
     private var indexOfTheOneAndOnlyFaceUpCard: Int? {
         get { cards.indices.filter {  cards[$0].isFaceUp }.only }
