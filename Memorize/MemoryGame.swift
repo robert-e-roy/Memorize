@@ -38,6 +38,8 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
 
                 }
                 self.cards[chosenIndex].isFaceUp = true
+                self.cards[chosenIndex].countNumberOfView += 1
+
 
             } else {
                 indexOfTheOneAndOnlyFaceUpCard = chosenIndex
@@ -62,6 +64,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     struct Card: Identifiable {
         var isFaceUp: Bool = false
         var isMatched: Bool = false
+        var countNumberOfView: Int = 0
         var content: CardContent
         var id: Int
     }

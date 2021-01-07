@@ -18,10 +18,16 @@ class EmojiMemoryGame: ObservableObject {
     }
     private static func createMemoryGame () -> MemoryGame<String>{
         let emojis  = ["👻","🎃","🕷","💀","🧙"]
+        
+        var themes = [[String]]()
+        themes.append(emojis)
+        
+        
+        
 
         
         return MemoryGame<String>(numberOfPairsOfCards:Int.random(in: 2...5) ) { pariIndex in
-            return emojis[pariIndex]
+            return themes[0][pariIndex]
         }
     }
 
