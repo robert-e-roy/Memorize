@@ -31,7 +31,9 @@ struct Cardify: AnimatableModifier {
             content
             }
                 .opacity(isFaceUp ? 1 : 0 )
-            RoundedRectangle(cornerRadius: cornerRadious).fill()
+            //RoundedRectangle(cornerRadius: cornerRadious).fill()
+            Image("cardBack").resizable()
+
                 .opacity(isFaceUp ? 0 : 1  )
 
             

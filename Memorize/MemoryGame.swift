@@ -17,6 +17,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     // need mutating in a struct
     
     var score = 0
+    var themeNamed = ""
     
     private var indexOfTheOneAndOnlyFaceUpCard: Int? {
         get { cards.indices.filter {  cards[$0].isFaceUp }.only }
@@ -48,8 +49,9 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     }
    
     
-    init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
+    init(numberOfPairsOfCards: Int, themeName: String,cardContentFactory: (Int) -> CardContent) {
         cards = Array<Card>()
+        themeNamed = themeName
         for pairIndex in 0..<numberOfPairsOfCards {
             let content = cardContentFactory(pairIndex)
             cards.append(Card(content: content, id: pairIndex*2))

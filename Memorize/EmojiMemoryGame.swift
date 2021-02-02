@@ -27,7 +27,7 @@ class EmojiMemoryGame: ObservableObject {
 
 
         
-        return MemoryGame<String>(numberOfPairsOfCards:Int.random(in: 2...5) ) { pariIndex in
+        return MemoryGame<String>(numberOfPairsOfCards:Int.random(in: 2...5), themeName: "rob" ) { pariIndex in
             return themes[1][pariIndex]
         }
     }
